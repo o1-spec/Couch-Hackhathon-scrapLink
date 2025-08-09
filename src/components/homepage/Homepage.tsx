@@ -13,7 +13,7 @@ export function HomePage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [userType, setUserType] = useState<"seller" | "buyer" | null>(null)
 
-  console.log("HomePage rendered with userType:", userType)
+  console.log(userType)
   useEffect(() => {
     setIsVisible(true)
 
@@ -117,9 +117,9 @@ export function HomePage() {
               <a href="#testimonials" className="text-gray-600 hover:text-[#006636] transition-colors">
                 Reviews
               </a>
-              <a href="#contact" className="text-gray-600 hover:text-[#006636] transition-colors">
+              <Link href="/contact" className="text-gray-600 hover:text-[#006636] transition-colors">
                 Contact
-              </a>
+              </Link>
             </div>
 
             <div className="flex items-center space-x-4">
@@ -178,14 +178,16 @@ export function HomePage() {
                         <ArrowRight className="ml-2 h-5 w-5" />
                       </Button>
                     </Link>
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="text-lg px-8 py-4 h-auto border-[#006636] text-[#006636] hover:bg-[#006636] hover:text-white bg-transparent"
-                    >
-                      <Play className="mr-2 h-5 w-5" />
-                      Watch Demo
-                    </Button>
+                    <Link href="/demo">
+                      <Button
+                        size="lg"
+                        variant="outline"
+                        className="text-lg px-8 py-4 h-auto border-[#006636] text-[#006636] hover:bg-[#006636] hover:text-white bg-transparent"
+                      >
+                        <Play className="mr-2 h-5 w-5" />
+                        Watch Demo
+                      </Button>
+                    </Link>
                   </>
                 ) : (
                   <Link href="/dashboard">
@@ -461,14 +463,14 @@ export function HomePage() {
               <h4 className="font-semibold mb-4">Platform</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <a href="#how-it-works" className="hover:text-white transition-colors">
                     How it Works
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <Link href="/pricing" className="hover:text-white transition-colors">
                     Pricing
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a href="#" className="hover:text-white transition-colors">
@@ -492,19 +494,19 @@ export function HomePage() {
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <Link href="/contact" className="hover:text-white transition-colors">
                     Contact Us
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <Link href="/privacy" className="hover:text-white transition-colors">
                     Privacy Policy
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <Link href="/terms" className="hover:text-white transition-colors">
                     Terms of Service
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
