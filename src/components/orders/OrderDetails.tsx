@@ -44,7 +44,7 @@ export function OrderDetails({ orderId, onBack, user }: OrderDetailsProps) {
     orderNumber: "ORD-2024-001",
     listingId: "lst_1",
     listingTitle: "Premium Copper Wire Bundle - 50lbs",
-    listingImage: "/placeholder.svg?height=120&width=120&text=Copper",
+    listingImage: "/copper-placeholder.svg",
     buyerName: user.userType === "seller" ? "Sarah Johnson" : user.name,
     buyerEmail: user.userType === "seller" ? "sarah@example.com" : user.email,
     buyerPhone: user.userType === "seller" ? "+1 (555) 123-4567" : "+1 (555) 123-4567",

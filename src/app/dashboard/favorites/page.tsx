@@ -8,7 +8,7 @@ const mockUser = {
   name: "John Smith",
   email: "john@example.com",
   userType: "buyer" as const,
-  avatar: "/placeholder.svg?height=40&width=40&text=JS",
+  avatar: '/avatar-placeholder.svg',
   location: "Chicago, IL",
   joinDate: "2023-06-15",
   isVerified: true,

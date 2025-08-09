@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -18,6 +19,7 @@ export function SellerLogin() {
   const [rememberMe, setRememberMe] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
+  const router = useRouter()
 
   const { fields, getFieldProps, validateAll, isValid } = useFormValidation(
     {
@@ -57,7 +59,8 @@ export function SellerLogin() {
       switch (scenario) {
         case 'success':
           toast.success('Welcome back!', 'Redirecting to your dashboard...')
-          // In real app, redirect to dashboard
+          // Redirect to dashboard with seller type
+          setTimeout(() => router.push('/dashboard?type=seller'), 1500)
           break
         case 'invalid-credentials':
           toast.error('Invalid credentials', 'Please check your email and password')

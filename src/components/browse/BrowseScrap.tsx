@@ -77,11 +77,11 @@ export function BrowseScrap({ user }: BrowseScrapProps) {
         name: "Mike's Electrical",
         rating: 4.8,
         verified: true,
-        avatar: "/placeholder.svg?height=40&width=40&text=ME",
+        avatar: "/avatar-placeholder.svg",
       },
       images: [
-        "/placeholder.svg?height=200&width=300&text=Copper+Wire",
-        "/placeholder.svg?height=200&width=300&text=Close+Up",
+        "/copper-placeholder.svg",
+        "/copper-placeholder.svg",
       ],
       description: "Clean copper wire from electrical work. No insulation, ready for pickup.",
       condition: "excellent",
@@ -102,9 +102,9 @@ export function BrowseScrap({ user }: BrowseScrapProps) {
         name: "Sarah Johnson",
         rating: 4.6,
         verified: true,
-        avatar: "/placeholder.svg?height=40&width=40&text=SJ",
+        avatar: "/avatar-placeholder.svg",
       },
-      images: ["/placeholder.svg?height=200&width=300&text=Aluminum+Cans"],
+      images: ["/aluminum-placeholder.svg"],
       description: "Clean aluminum cans, crushed and bagged. Perfect condition.",
       condition: "good",
       listedDate: "2024-01-14",
@@ -125,11 +125,11 @@ export function BrowseScrap({ user }: BrowseScrapProps) {
         name: "Construction Plus",
         rating: 4.9,
         verified: true,
-        avatar: "/placeholder.svg?height=40&width=40&text=CP",
+        avatar: "/avatar-placeholder.svg",
       },
       images: [
-        "/placeholder.svg?height=200&width=300&text=Steel+Beams",
-        "/placeholder.svg?height=200&width=300&text=Measurements",
+        "/steel-placeholder.svg",
+        "/steel-placeholder.svg",
       ],
       description: "Structural steel beams from demolition project. Various lengths available.",
       condition: "fair",
@@ -392,7 +392,7 @@ export function BrowseScrap({ user }: BrowseScrapProps) {
                 {/* Image */}
                 <div className="relative">
                   <Image
-                    src={listing.images[0] || "/placeholder.svg"}
+                    src={listing.images[0] || "/image-placeholder.svg"}
                     alt={listing.title}
                     width={300}
                     height={200}
@@ -468,7 +468,7 @@ export function BrowseScrap({ user }: BrowseScrapProps) {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Image
-                        src={listing.seller.avatar || "/placeholder.svg"}
+                        src={listing.seller.avatar || "/avatar-placeholder.svg"}
                         alt={listing.seller.name}
                         width={24}
                         height={24}

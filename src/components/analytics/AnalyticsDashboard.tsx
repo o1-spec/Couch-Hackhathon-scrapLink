@@ -88,7 +88,7 @@ export function AnalyticsDashboard({ user }: AnalyticsDashboardProps) {
     {
       id: '1',
       title: 'Premium Copper Wire Bundle - 50lbs',
-      image: '/placeholder.svg?height=60&width=60',
+      image: '/copper-placeholder.svg',
       views: 456,
       sales: 12,
       revenue: 2940.00,
@@ -98,7 +98,7 @@ export function AnalyticsDashboard({ user }: AnalyticsDashboardProps) {
     {
       id: '2',
       title: 'Steel Beams - Various Sizes',
-      image: '/placeholder.svg?height=60&width=60',
+      image: '/steel-placeholder.svg',
       views: 324,
       sales: 8,
       revenue: 3600.00,
@@ -108,7 +108,7 @@ export function AnalyticsDashboard({ user }: AnalyticsDashboardProps) {
     {
       id: '3',
       title: 'Aluminum Cans Collection',
-      image: '/placeholder.svg?height=60&width=60',
+      image: '/aluminum-placeholder.svg',
       views: 289,
       sales: 15,
       revenue: 1275.00,
@@ -118,7 +118,7 @@ export function AnalyticsDashboard({ user }: AnalyticsDashboardProps) {
     {
       id: '4',
       title: 'Electronic Components Lot',
-      image: '/placeholder.svg?height=60&width=60',
+      image: '/image-placeholder.svg',
       views: 198,
       sales: 6,
       revenue: 1890.00,
@@ -131,7 +131,7 @@ export function AnalyticsDashboard({ user }: AnalyticsDashboardProps) {
     {
       id: '1',
       name: 'Sarah Johnson',
-      avatar: '/placeholder.svg?height=40&width=40',
+      avatar: '/avatar-placeholder.svg',
       totalPurchases: 8,
       totalSpent: 2340.00,
       lastPurchase: '2024-01-20',
@@ -141,7 +141,7 @@ export function AnalyticsDashboard({ user }: AnalyticsDashboardProps) {
     {
       id: '2',
       name: 'Mike Rodriguez',
-      avatar: '/placeholder.svg?height=40&width=40',
+      avatar: '/avatar-placeholder.svg',
       totalPurchases: 5,
       totalSpent: 1890.00,
       lastPurchase: '2024-01-18',
@@ -151,7 +151,7 @@ export function AnalyticsDashboard({ user }: AnalyticsDashboardProps) {
     {
       id: '3',
       name: 'Emily Chen',
-      avatar: '/placeholder.svg?height=40&width=40',
+      avatar: '/avatar-placeholder.svg',
       totalPurchases: 12,
       totalSpent: 3450.00,
       lastPurchase: '2024-01-22',
@@ -231,7 +231,7 @@ export function AnalyticsDashboard({ user }: AnalyticsDashboardProps) {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <Image
-                src={user.avatar || "/placeholder.svg"}
+                src={user.avatar || "/avatar-placeholder.svg"}
                 alt={user.name}
                 width={64}
                 height={64}

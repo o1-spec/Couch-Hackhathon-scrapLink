@@ -214,7 +214,7 @@ export function DashboardLayout({ children, user }: DashboardLayoutProps) {
         )}
 
         {/* Main Content */}
-        <main className="flex-1 lg:ml-0">{children}</main>
+        <main className="flex-1 lg:ml-0 p-8">{children}</main>
       </div>
 
       {/* Sign Out Dialog */}

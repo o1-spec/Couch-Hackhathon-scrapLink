@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -17,6 +18,7 @@ export function BuyerRegister() {
   const [acceptTerms, setAcceptTerms] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
+  const router = useRouter()
 
   const { fields, getFieldProps, validateAll, isValid } = useFormValidation(
     {
@@ -93,7 +95,8 @@ export function BuyerRegister() {
       
       if (success) {
         toast.success('Business Account Created!', 'Please check your email to verify your account')
-        // In real app, redirect to email verification page
+        // Redirect to dashboard after successful registration
+        setTimeout(() => router.push('/dashboard?type=buyer'), 2000)
       } else {
         toast.error('Registration Failed', 'This business email is already registered')
       }

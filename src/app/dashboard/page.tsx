@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { SellerDashboard } from '@/components/dashboard/SellerDashboard'
 import { BuyerDashboard } from '@/components/dashboard/BuyerDashboard'
 import { DashboardLayout } from '@/components/dashboard/DashboardLayout'
@@ -10,7 +11,7 @@ const mockUser = {
   name: 'John Smith',
   email: 'john@example.com',
   type: 'seller' as 'seller' | 'buyer',
-  avatar: '/placeholder.svg?height=40&width=40',
+  avatar: '/avatar-placeholder.svg',
   verified: true,
   joinedDate: '2024-01-15',
   location: 'New York, USA',
@@ -21,6 +22,7 @@ const mockUser = {
 
 
 export default function Dashboard() {
+  const searchParams = useSearchParams()
   const [userType, setUserType] = useState<'seller' | 'buyer'>('seller')
   const [isLoading, setIsLoading] = useState(true)
 
@@ -30,17 +32,24 @@ export default function Dashboard() {
 
   const currentUser = {
     ...mockUser,
-    type: userType
+    type: userType,
+    userType: userType
   }
 
   useEffect(() => {
+    // Get user type from URL params if available
+    const typeParam = searchParams.get('type')
+    if (typeParam === 'buyer' || typeParam === 'seller') {
+      setUserType(typeParam)
+    }
+    
     // Simulate loading user data
     const timer = setTimeout(() => {
       setIsLoading(false)
     }, 1000)
 
     return () => clearTimeout(timer)
-  }, [])
+  }, [searchParams])
 
   if (isLoading) {
     return (

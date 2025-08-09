@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -17,6 +18,7 @@ export function SellerRegister() {
   const [acceptTerms, setAcceptTerms] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
+  const router = useRouter()
 
   const { fields, getFieldProps, validateAll, isValid } = useFormValidation(
     {
@@ -82,7 +84,9 @@ export function SellerRegister() {
       
       if (success) {
         toast.success('Account Created!', 'Please check your email to verify your account')
-        // In real app, redirect to email verification page
+        console.log('hello')
+        // Redirect to dashboard after successful registration
+        setTimeout(() => router.push('/dashboard?type=seller'), 2000)
       } else {
         toast.error('Registration Failed', 'This email address is already registered')
       }

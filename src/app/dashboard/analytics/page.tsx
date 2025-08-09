@@ -8,7 +8,7 @@ const mockUser = {
   name: 'John Smith',
   email: 'john@example.com',
   type: 'seller' as 'seller' | 'buyer',
-  avatar: '/placeholder.svg?height=40&width=40',
+  avatar: '/avatar-placeholder.svg',
   verified: true,
   joinedDate: '2024-01-15',
   location: 'New York, USA',

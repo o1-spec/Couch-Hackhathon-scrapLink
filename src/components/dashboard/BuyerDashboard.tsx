@@ -40,7 +40,7 @@ export function BuyerDashboard({ user }: BuyerDashboardProps) {
       price: 125.00,
       status: 'delivered',
       orderDate: '2024-01-18',
-      image: '/placeholder.svg?height=60&width=60'
+      image: '/copper-placeholder.svg'
     },
     {
       id: '2',
@@ -49,7 +49,7 @@ export function BuyerDashboard({ user }: BuyerDashboardProps) {
       price: 180.00,
       status: 'in-transit',
       orderDate: '2024-01-20',
-      image: '/placeholder.svg?height=60&width=60'
+      image: '/aluminum-placeholder.svg'
     },
     {
       id: '3',
@@ -58,7 +58,7 @@ export function BuyerDashboard({ user }: BuyerDashboardProps) {
       price: 220.00,
       status: 'processing',
       orderDate: '2024-01-21',
-      image: '/placeholder.svg?height=60&width=60'
+      image: '/steel-placeholder.svg'
     }
   ]
 
@@ -71,7 +71,7 @@ export function BuyerDashboard({ user }: BuyerDashboardProps) {
       originalPrice: 520.00,
       rating: 4.8,
       location: 'Chicago, IL',
-      image: '/placeholder.svg?height=120&width=120',
+      image: '/copper-placeholder.svg',
       verified: true,
       pickup: true
     },
@@ -82,7 +82,7 @@ export function BuyerDashboard({ user }: BuyerDashboardProps) {
       price: 380.00,
       rating: 4.9,
       location: 'Detroit, MI',
-      image: '/placeholder.svg?height=120&width=120',
+      image: '/steel-placeholder.svg',
       verified: true,
       pickup: false
     },
@@ -93,7 +93,7 @@ export function BuyerDashboard({ user }: BuyerDashboardProps) {
       price: 290.00,
       rating: 4.7,
       location: 'Milwaukee, WI',
-      image: '/placeholder.svg?height=120&width=120',
+      image: '/brass-placeholder.svg',
       verified: false,
       pickup: true
     }

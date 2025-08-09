@@ -26,7 +26,7 @@ export function LiveActivityFeed() {
         {
             type: "sale",
             user: "Sarah J.",
-            avatar: "/placeholder.svg?height=32&width=32",
+            avatar: "/avatar-placeholder.svg",
             description: "sold Copper Wire Bundle",
             amount: 245,
             location: "Chicago, IL",
@@ -34,7 +34,7 @@ export function LiveActivityFeed() {
         {
             type: "listing",
             user: "Mike R.",
-            avatar: "/placeholder.svg?height=32&width=32",
+            avatar: "/avatar-placeholder.svg",
             description: "listed Steel Beams",
             amount: 450,
             location: "Detroit, MI",
@@ -42,21 +42,21 @@ export function LiveActivityFeed() {
         {
             type: "message",
             user: "Emily C.",
-            avatar: "/placeholder.svg?height=32&width=32",
+            avatar: "/avatar-placeholder.svg",
             description: "sent inquiry about Aluminum Sheets",
             location: "Milwaukee, WI",
         },
         {
             type: "signup",
             user: "John D.",
-            avatar: "/placeholder.svg?height=32&width=32",
+            avatar: "/avatar-placeholder.svg",
             description: "joined ScrapLink as verified seller",
             location: "Cleveland, OH",
         },
         {
             type: "sale",
             user: "Lisa M.",
-            avatar: "/placeholder.svg?height=32&width=32",
+            avatar: "/avatar-placeholder.svg",
             description: "sold Brass Fittings",
             amount: 180,
             location: "Indianapolis, IN",
@@ -147,7 +147,7 @@ export function LiveActivityFeed() {
                             </div>
 
                             <Avatar className="w-8 h-8 flex-shrink-0">
-                                <AvatarImage src={activity.avatar || "/placeholder.svg"} alt={activity.user} />
+                                <AvatarImage src={activity.avatar || "/avatar-placeholder.svg"} alt={activity.user} />
                                 <AvatarFallback className="text-xs font-poppins">
                                     {activity.user
                                         .split(" ")

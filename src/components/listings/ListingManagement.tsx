@@ -61,7 +61,7 @@ export function ListingManagement({ user }: ListingManagementProps) {
       inquiries: 8,
       createdAt: '2024-01-20',
       updatedAt: '2024-01-20',
-      images: ['/placeholder.svg?height=200&width=200'],
+      images: ['/image-placeholder.svg'],
       location: 'Chicago, IL',
       pickupAvailable: true
     },
@@ -78,7 +78,7 @@ export function ListingManagement({ user }: ListingManagementProps) {
       inquiries: 12,
       createdAt: '2024-01-18',
       updatedAt: '2024-01-19',
-      images: ['/placeholder.svg?height=200&width=200'],
+      images: ['/image-placeholder.svg'],
       location: 'Chicago, IL',
       pickupAvailable: false
     },
@@ -95,7 +95,7 @@ export function ListingManagement({ user }: ListingManagementProps) {
       inquiries: 3,
       createdAt: '2024-01-19',
       updatedAt: '2024-01-21',
-      images: ['/placeholder.svg?height=200&width=200'],
+      images: ['/image-placeholder.svg'],
       location: 'Chicago, IL',
       pickupAvailable: true
     },
@@ -112,7 +112,7 @@ export function ListingManagement({ user }: ListingManagementProps) {
       inquiries: 0,
       createdAt: '2024-01-21',
       updatedAt: '2024-01-21',
-      images: ['/placeholder.svg?height=200&width=200'],
+      images: ['/image-placeholder.svg'],
       location: 'Chicago, IL',
       pickupAvailable: true
     }

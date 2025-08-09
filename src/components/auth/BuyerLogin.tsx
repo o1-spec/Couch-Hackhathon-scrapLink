@@ -1,18 +1,49 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Separator } from '@/components/ui/separator'
+import { useToast } from '@/hooks/use-toast'
 import { Building2, Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { ToastContainer } from '../ui/toast-container'
 
 export function BuyerLogin() {
   const [showPassword, setShowPassword] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const { toast } = useToast()
+  const router = useRouter()
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500))
+      
+      // Simulate success/error
+      const success = Math.random() > 0.3 // 70% success rate for demo
+      
+      if (success) {
+        toast.success('Welcome back!', 'Redirecting to your business dashboard...')
+        setTimeout(() => router.push('/dashboard?type=buyer'), 1500)
+      } else {
+        toast.error('Invalid credentials', 'Please check your email and password')
+      }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      toast.error('Something went wrong', 'Please try again later')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-8">
@@ -26,12 +57,12 @@ export function BuyerLogin() {
             <p className="text-gray-600">Access your business dashboard and orders</p>
           </div>
 
-          <form className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <Label htmlFor="businessEmailLogin">Business Email</Label>
               <div className="relative mt-1">
                 <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                <Input id="businessEmailLogin" type="email" placeholder="contact@yourcompany.com" className="pl-10" />
+                <Input id="businessEmailLogin" type="email" placeholder="contact@yourcompany.com" className="pl-10" required />
               </div>
             </div>
 
@@ -44,6 +75,7 @@ export function BuyerLogin() {
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
                   className="pl-10 pr-10"
+                  required
                 />
                 <button
                   type="button"
@@ -69,9 +101,22 @@ export function BuyerLogin() {
               </Link>
             </div>
 
-            <Button className="w-full h-12 bg-[#006636] hover:bg-[#005528] text-white font-medium">
-              Sign In
-              <ArrowRight className="ml-2 h-4 w-4" />
+            <Button 
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full h-12 bg-[#006636] hover:bg-[#005528] text-white font-medium disabled:opacity-50"
+            >
+              {isSubmitting ? (
+                <>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                  Signing In...
+                </>
+              ) : (
+                <>
+                  Sign In
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </>
+              )}
             </Button>
           </form>
 
@@ -97,6 +142,7 @@ export function BuyerLogin() {
           </div>
         </CardContent>
       </Card>
+      <ToastContainer />
     </div>
   )
 }

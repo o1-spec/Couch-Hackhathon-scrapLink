@@ -56,7 +56,7 @@ export function MessagingSystem({ user }: MessagingSystemProps) {
       name: 'Sarah Johnson',
       email: 'sarah@example.com',
       type: 'buyer',
-      avatar: '/placeholder.svg?height=40&width=40',
+      avatar: '/avatar-placeholder.svg',
       verified: true,
       joinedDate: '2024-01-10'
     },
@@ -65,7 +65,7 @@ export function MessagingSystem({ user }: MessagingSystemProps) {
       name: 'Mike Rodriguez',
       email: 'mike@example.com',
       type: 'buyer',
-      avatar: '/placeholder.svg?height=40&width=40',
+      avatar: '/avatar-placeholder.svg',
       verified: false,
       joinedDate: '2024-01-12'
     },
@@ -74,7 +74,7 @@ export function MessagingSystem({ user }: MessagingSystemProps) {
       name: 'Emily Chen',
       email: 'emily@example.com',
       type: 'seller',
-      avatar: '/placeholder.svg?height=40&width=40',
+      avatar: '/avatar-placeholder.svg',
       verified: true,
       joinedDate: '2024-01-08'
     }
@@ -96,7 +96,7 @@ export function MessagingSystem({ user }: MessagingSystemProps) {
       unreadCount: 2,
       listingTitle: 'Premium Copper Wire Bundle - 50lbs',
       listingPrice: 245.00,
-      listingImage: '/placeholder.svg?height=60&width=60'
+      listingImage: '/image-placeholder.svg'
     },
     {
       id: '2',
@@ -113,7 +113,7 @@ export function MessagingSystem({ user }: MessagingSystemProps) {
       unreadCount: 0,
       listingTitle: 'Steel Beams - Various Sizes',
       listingPrice: 450.00,
-      listingImage: '/placeholder.svg?height=60&width=60'
+      listingImage: '/image-placeholder.svg'
     },
     {
       id: '3',
@@ -130,7 +130,7 @@ export function MessagingSystem({ user }: MessagingSystemProps) {
       unreadCount: 0,
       listingTitle: 'Aluminum Sheets - 50lbs',
       listingPrice: 180.00,
-      listingImage: '/placeholder.svg?height=60&width=60'
+      listingImage: '/image-placeholder.svg'
     }
   ]
 

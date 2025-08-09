@@ -101,7 +101,7 @@ export function SellerDashboard({ user }: SellerDashboardProps) {
       status: 'active',
       views: 23,
       inquiries: 3,
-      image: '/placeholder.svg?height=60&width=60',
+      image: '/copper-placeholder.svg',
       createdAt: '2024-01-20'
     },
     {
@@ -111,7 +111,7 @@ export function SellerDashboard({ user }: SellerDashboardProps) {
       status: 'sold',
       views: 45,
       inquiries: 8,
-      image: '/placeholder.svg?height=60&width=60',
+      image: '/aluminum-placeholder.svg',
       createdAt: '2024-01-18'
     },
     {
@@ -121,7 +121,7 @@ export function SellerDashboard({ user }: SellerDashboardProps) {
       status: 'pending',
       views: 12,
       inquiries: 2,
-      image: '/placeholder.svg?height=60&width=60',
+      image: '/steel-placeholder.svg',
       createdAt: '2024-01-19'
     }
   ]
@@ -321,7 +321,7 @@ export function SellerDashboard({ user }: SellerDashboardProps) {
               {recentListings.map((listing) => (
                 <div key={listing.id} className="flex items-center gap-4 p-3 border rounded-lg hover:bg-gray-50 transition-colors">
                   <Image
-                    src={listing.image || "/placeholder.svg"}
+                    src={listing.image || "/image-placeholder.svg"}
                     alt={listing.title}
                     className="w-12 h-12 rounded-lg object-cover"
                     width={60}

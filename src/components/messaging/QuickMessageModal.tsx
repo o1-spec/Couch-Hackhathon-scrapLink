@@ -82,7 +82,7 @@ export function QuickMessageModal({ isOpen, onClose, recipient, listing }: Quick
           {/* Recipient Info */}
           <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
             <Avatar className="w-10 h-10">
-              <AvatarImage src={recipient.avatar || "/placeholder.svg"} alt={recipient.name} />
+              <AvatarImage src={recipient.avatar || "/avatar-placeholder.svg"} alt={recipient.name} />
               <AvatarFallback className="font-poppins">
                 {recipient.name.split(' ').map(n => n[0]).join('')}
               </AvatarFallback>
