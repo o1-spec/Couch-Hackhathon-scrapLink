@@ -12,7 +12,7 @@ export default function DemoPage() {
   const [isPlaying, setIsPlaying] = useState(false)
 
   console.log(isPlaying)
-  
+
   const demoSteps = [
     {
       title: "Upload Your Scrap",
@@ -115,7 +115,7 @@ export default function DemoPage() {
               <span className="text-[#006636] hover:text-[#005528]">Back to Home</span>
             </Link>
             <h1 className="text-xl font-bold text-gray-900">ScrapLink Demo</h1>
-            <Link href="/auth">
+            <Link href="/demo/hackathon">
               <Button className="bg-[#006636] hover:bg-[#005528] text-white">Get Started</Button>
             </Link>
           </div>
@@ -189,24 +189,22 @@ export default function DemoPage() {
             {demoSteps.map((step, index) => (
               <Card
                 key={index}
-                className={`cursor-pointer transition-all duration-200 ${
-                  index === currentStep
+                className={`cursor-pointer transition-all duration-200 ${index === currentStep
                     ? "ring-2 ring-[#006636] bg-green-50"
                     : index < currentStep
                       ? "bg-gray-50"
                       : "hover:bg-gray-50"
-                }`}
+                  }`}
                 onClick={() => setCurrentStep(index)}
               >
                 <CardContent className="p-4 text-center">
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold ${
-                      index === currentStep
+                    className={`w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold ${index === currentStep
                         ? "bg-[#006636] text-white"
                         : index < currentStep
                           ? "bg-green-500 text-white"
                           : "bg-gray-200 text-gray-600"
-                    }`}
+                      }`}
                   >
                     {index + 1}
                   </div>

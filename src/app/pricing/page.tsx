@@ -74,12 +74,12 @@ export default function PricingPage() {
     {
       question: "Can I cancel my subscription anytime?",
       answer:
-        "Yes, you can cancel your subscription at any time. You'll continue to have access to paid features until the end of your billing period.",
+        "Yes, you can cancel your subscription at any time. You&rsquo;ll continue to have access to paid features until the end of your billing period.",
     },
     {
       question: "Do you offer refunds?",
       answer:
-        "We offer a 30-day money-back guarantee for all paid subscriptions. If you're not satisfied, we'll provide a full refund.",
+        "We offer a 30-day money-back guarantee for all paid subscriptions. If you&rsquo;re not satisfied, we&rsquo;ll provide a full refund.",
     },
     {
       question: "What payment methods do you accept?",

@@ -608,13 +608,15 @@ export function HomePage() {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-[#006636] text-lg px-8 py-4 h-auto bg-transparent"
-              >
-                Learn More
-              </Button>
+              <Link href="/learn-more">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-white text-white hover:bg-white hover:text-[#006636] text-lg px-8 py-4 h-auto bg-transparent"
+                >
+                  Learn More
+                </Button>
+              </Link>
             </div>
           ) : (
             <Link href="/dashboard">

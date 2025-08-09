@@ -328,7 +328,7 @@ export function DisputeResolution({ user, orderData }: DisputeResolutionProps) {
           </CardHeader>
           <CardContent>
             <Textarea
-              placeholder="Please provide a detailed description of the issue, including what happened, when it occurred, and what resolution you're seeking..."
+              placeholder="Please provide a detailed description of the issue, including what happened, when it occurred, and what resolution you&rsquo;re seeking..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               className="font-poppins"
