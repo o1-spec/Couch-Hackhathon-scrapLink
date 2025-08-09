@@ -4,38 +4,38 @@ import type React from "react"
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import {
-  Recycle,
-  Home,
+  LayoutDashboard,
   Package,
-  ShoppingCart,
+  MessageSquare,
+  CreditCard,
   BarChart3,
   Settings,
   Bell,
+  LogOut,
   Search,
+  Heart,
+  ShoppingCart,
+  PlusCircle,
+  DollarSign,
   Menu,
   X,
-  LogOut,
-  User,
-  Shield,
-  Heart,
-  MessageSquare,
-  Wallet,
 } from "lucide-react"
 import Link from "next/link"
-import { NotificationCenter } from "../notifications/NotificationCenter"
+import Image from "next/image"
+import { usePathname } from "next/navigation"
 import { SignOutDialog } from "../auth/SignoutDialog"
 
 interface User {
   id: string
   name: string
   email: string
-  type: 'seller' | 'buyer'
-  avatar?: string
-  verified: boolean
-  joinedDate?: string
+  userType: "seller" | "buyer"
+  avatar: string
+  location: string
+  joinDate: string
+  isVerified: boolean
 }
 
 interface DashboardLayoutProps {
@@ -44,173 +44,181 @@ interface DashboardLayoutProps {
 }
 
 export function DashboardLayout({ children, user }: DashboardLayoutProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [notifications] = useState(3) // Mock notification count
+  const pathname = usePathname()
   const [showSignOutDialog, setShowSignOutDialog] = useState(false)
-  const [showNotifications, setShowNotifications] = useState(false)
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const [unreadNotifications] = useState(3) // Mock unread count
 
   const sellerNavItems = [
-    { icon: Home, label: "Dashboard", href: "/dashboard", active: true },
-    { icon: Package, label: "My Listings", href: "/dashboard/listings", count: 12 },
+    { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
+    { icon: Package, label: "My Listings", href: "/dashboard/listings" },
+    { icon: ShoppingCart, label: "Orders", href: "/dashboard/orders" },
+    { icon: MessageSquare, label: "Messages", href: "/dashboard/messages" },
+    { icon: DollarSign, label: "Earnings", href: "/dashboard/earnings" },
     { icon: BarChart3, label: "Analytics", href: "/dashboard/analytics" },
-    { icon: ShoppingCart, label: "Orders", href: "/dashboard/orders", count: 5 },
-    { icon: Wallet, label: "Earnings", href: "/dashboard/earnings" },
-    { icon: MessageSquare, label: "Messages", href: "/dashboard/messages", count: 2 },
     { icon: Settings, label: "Settings", href: "/dashboard/settings" },
   ]
 
   const buyerNavItems = [
-    { icon: Home, label: "Dashboard", href: "/dashboard", active: true },
-    { icon: Search, label: "Browse Scrap", href: "/dashboard/browse" },
-    { icon: ShoppingCart, label: "My Orders", href: "/dashboard/orders", count: 3 },
-    { icon: Heart, label: "Favorites", href: "/dashboard/favorites", count: 8 },
-    { icon: MessageSquare, label: "Messages", href: "/dashboard/messages", count: 1 },
-    { icon: Wallet, label: "Payment Methods", href: "/dashboard/payments" },
+    { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
+    { icon: Search, label: "Browse", href: "/dashboard/browse" },
+    { icon: Heart, label: "Favorites", href: "/dashboard/favorites" },
+    { icon: ShoppingCart, label: "Orders", href: "/dashboard/orders" },
+    { icon: MessageSquare, label: "Messages", href: "/dashboard/messages" },
+    { icon: CreditCard, label: "Payments", href: "/dashboard/payments" },
     { icon: Settings, label: "Settings", href: "/dashboard/settings" },
   ]
 
-  const navItems = user.type === "seller" ? sellerNavItems : buyerNavItems
+  const navItems = user.userType === "seller" ? sellerNavItems : buyerNavItems
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Mobile sidebar overlay */}
-      {sidebarOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden" onClick={() => setSidebarOpen(false)} />
-      )}
-
-      {/* Sidebar */}
-      <div
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        {/* Sidebar Header */}
-        <div className="flex items-center justify-between p-6 border-b">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-[#006636] rounded-lg flex items-center justify-center">
-              <Recycle className="h-5 w-5 text-white" />
+      {/* Header */}
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
+        <div className="px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo and Mobile Menu */}
+            <div className="flex items-center gap-4">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="lg:hidden"
+                onClick={() => setShowMobileMenu(!showMobileMenu)}
+              >
+                {showMobileMenu ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </Button>
+              <Link href="/dashboard" className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-[#006636] rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">SL</span>
+                </div>
+                <span className="font-bold text-xl text-gray-900 font-poppins">ScrapLink</span>
+              </Link>
             </div>
-            <span className="text-xl font-bold text-gray-900 font-poppins">ScrapLink</span>
-          </div>
-          <Button variant="ghost" size="sm" className="lg:hidden" onClick={() => setSidebarOpen(false)}>
-            <X className="h-4 w-4" />
-          </Button>
-        </div>
 
-        {/* User Info */}
-        <div className="p-6 border-b">
-          <div className="flex items-center gap-3 mb-3">
-            <Avatar className="h-10 w-10">
-              <AvatarImage src={user.avatar || "/placeholder.svg"} alt={user.name} />
-              <AvatarFallback className="bg-[#006636] text-white font-poppins">
-                {user.name
-                  .split(" ")
-                  .map((n: string) => n[0])
-                  .join("")}
-              </AvatarFallback>
-            </Avatar>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2">
-                <p className="text-sm font-medium text-gray-900 truncate font-poppins">{user.name}</p>
-                {user.verified && <Shield className="h-4 w-4 text-green-600" />}
-              </div>
-              <p className="text-xs text-gray-500 truncate font-poppins">{user.email}</p>
-            </div>
-          </div>
-          <Badge variant="outline" className="text-xs font-poppins capitalize">
-            {user.type} Account
-          </Badge>
-        </div>
-
-        {/* Navigation */}
-        <nav className="flex-1 p-4">
-          <ul className="space-y-2">
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors font-poppins ${
-                    item.active ? "bg-[#006636] text-white" : "text-gray-700 hover:bg-gray-100"
-                  }`}
+            {/* User Actions */}
+            <div className="flex items-center gap-4">
+              {user.userType === "seller" && (
+                <Button
+                  size="sm"
+                  className="bg-[#006636] hover:bg-[#005528] text-white font-poppins hidden sm:flex"
+                  asChild
                 >
-                  {item.icon && <item.icon className="h-4 w-4" />}
-                  <span className="flex-1">{item.label}</span>
-                  {item.count && (
-                    <Badge variant="secondary" className="text-xs">
-                      {item.count}
+                  <Link href="/dashboard/listings/create">
+                    <PlusCircle className="h-4 w-4 mr-2" />
+                    Add Listing
+                  </Link>
+                </Button>
+              )}
+
+              {/* Notifications */}
+              <Button variant="ghost" size="sm" className="relative" asChild>
+                <Link href="/notifications">
+                  <Bell className="h-5 w-5" />
+                  {unreadNotifications > 0 && (
+                    <Badge
+                      variant="destructive"
+                      className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs"
+                    >
+                      {unreadNotifications}
                     </Badge>
                   )}
                 </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        {/* Sidebar Footer */}
-        <div className="p-4 border-t">
-          <Button
-            variant="ghost"
-            className="w-full justify-start text-gray-700 font-poppins"
-            onClick={() => setShowSignOutDialog(true)}
-          >
-            <LogOut className="h-4 w-4 mr-3" />
-            Sign Out
-          </Button>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="lg:pl-64">
-        {/* Top Header */}
-        <header className="bg-white shadow-sm border-b">
-          <div className="flex items-center justify-between px-6 py-4">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="sm" className="lg:hidden" onClick={() => setSidebarOpen(true)}>
-                <Menu className="h-5 w-5" />
               </Button>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900 font-poppins">
-                  {user.type === "seller" ? "Seller Dashboard" : "Buyer Dashboard"}
-                </h1>
-                <p className="text-sm text-gray-600 font-poppins">Welcome back, {user.name.split(" ")[0]}!</p>
-              </div>
-            </div>
 
-            <div className="flex items-center gap-4">
-              {/* Search */}
-              <div className="hidden md:block relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#006636] focus:border-transparent font-poppins"
+              {/* User Profile */}
+              <div className="flex items-center gap-3">
+                <div className="hidden sm:block text-right">
+                  <p className="text-sm font-medium text-gray-900 font-poppins">{user.name}</p>
+                  <p className="text-xs text-gray-600 font-poppins capitalize">
+                    {user.userType} {user.isVerified && "• Verified"}
+                  </p>
+                </div>
+                <Image
+                  src={user.avatar || "/placeholder.svg"}
+                  alt={user.name}
+                  width={40}
+                  height={40}
+                  className="w-10 h-10 rounded-full cursor-pointer"
                 />
               </div>
 
-              {/* Notifications */}
-              <Button variant="ghost" size="sm" className="relative" onClick={() => setShowNotifications(true)}>
-                <Bell className="h-5 w-5" />
-                {notifications > 0 && (
-                  <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs bg-red-500">
-                    {notifications}
-                  </Badge>
-                )}
-              </Button>
-
-              {/* Profile */}
-              <Button variant="ghost" size="sm">
-                <User className="h-5 w-5" />
+              {/* Sign Out */}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowSignOutDialog(true)}
+                className="text-gray-600 hover:text-gray-900"
+              >
+                <LogOut className="h-5 w-5" />
               </Button>
             </div>
           </div>
-        </header>
+        </div>
+      </header>
 
-        {/* Page Content */}
-        <main className="p-6">{children}</main>
+      <div className="flex">
+        {/* Sidebar */}
+        <aside
+          className={`
+          fixed inset-y-0 left-0 z-30 w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0
+          ${showMobileMenu ? "translate-x-0" : "-translate-x-full"}
+        `}
+        >
+          <div className="flex flex-col h-full pt-16 lg:pt-0">
+            <nav className="flex-1 px-4 py-6 space-y-2">
+              {navItems.map((item) => {
+                const Icon = item.icon
+                const isActive = pathname === item.href
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`
+                      flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors font-poppins
+                      ${isActive ? "bg-[#006636] text-white" : "text-gray-700 hover:bg-gray-100"}
+                    `}
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    <Icon className="h-5 w-5" />
+                    {item.label}
+                  </Link>
+                )
+              })}
+            </nav>
+
+            {/* User Info in Sidebar */}
+            <div className="p-4 border-t border-gray-200">
+              <div className="flex items-center gap-3">
+                <Image
+                  src={user.avatar || "/placeholder.svg"}
+                  alt={user.name}
+                  width={40}
+                  height={40}
+                  className="w-10 h-10 rounded-full"
+                />
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-gray-900 truncate font-poppins">{user.name}</p>
+                  <p className="text-xs text-gray-600 truncate font-poppins">{user.location}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        {/* Mobile Overlay */}
+        {showMobileMenu && (
+          <div
+            className="fixed inset-0 z-20 bg-black bg-opacity-50 lg:hidden"
+            onClick={() => setShowMobileMenu(false)}
+          />
+        )}
+
+        {/* Main Content */}
+        <main className="flex-1 lg:ml-0">{children}</main>
       </div>
-      <SignOutDialog isOpen={showSignOutDialog} onClose={() => setShowSignOutDialog(false)} userName={user.name} />
 
-      <NotificationCenter isOpen={showNotifications} onClose={() => setShowNotifications(false)} user={user} />
+      {/* Sign Out Dialog */}
+      <SignOutDialog isOpen={showSignOutDialog} onClose={() => setShowSignOutDialog(false)} user={user} />
     </div>
   )
 }
