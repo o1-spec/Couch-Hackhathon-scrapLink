@@ -4,7 +4,25 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Recycle, ArrowRight, Shield, Zap, Globe, TrendingUp, Users, DollarSign, Leaf, Star, Play } from "lucide-react"
+import {
+  Recycle,
+  ArrowRight,
+  Shield,
+  Zap,
+  Globe,
+  TrendingUp,
+  Users,
+  DollarSign,
+  Leaf,
+  Star,
+  Play,
+  CheckCircle,
+  Lock,
+  Award,
+  TreePine,
+  Factory,
+  Truck,
+} from "lucide-react"
 import Link from "next/link"
 
 export function HomePage() {
@@ -12,8 +30,10 @@ export function HomePage() {
   const [currentStat, setCurrentStat] = useState(0)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [userType, setUserType] = useState<"seller" | "buyer" | null>(null)
+  const [impactCounter, setImpactCounter] = useState(0)
 
   console.log(userType)
+
   useEffect(() => {
     setIsVisible(true)
 
@@ -35,7 +55,15 @@ export function HomePage() {
       setCurrentStat((prev) => (prev + 1) % 4)
     }, 3000)
 
-    return () => clearInterval(interval)
+    // Animate environmental impact counter
+    const impactInterval = setInterval(() => {
+      setImpactCounter((prev) => (prev + 1) % 1000)
+    }, 50)
+
+    return () => {
+      clearInterval(interval)
+      clearInterval(impactInterval)
+    }
   }, [])
 
   const stats = [
@@ -91,6 +119,56 @@ export function HomePage() {
       role: "Environmental Consultant",
       content: "The environmental impact tracking feature helps our clients meet sustainability goals effectively.",
       rating: 5,
+    },
+  ]
+
+  const trustFeatures = [
+    {
+      icon: Shield,
+      title: "Bank-Level Security",
+      description: "256-bit SSL encryption and secure payment processing protect every transaction.",
+    },
+    {
+      icon: CheckCircle,
+      title: "Verified Users",
+      description: "All users undergo identity verification and background checks before trading.",
+    },
+    {
+      icon: Award,
+      title: "Insured Transactions",
+      description: "Every transaction is backed by comprehensive insurance coverage up to $50,000.",
+    },
+    {
+      icon: Lock,
+      title: "Escrow Protection",
+      description: "Funds are held securely until both parties confirm transaction completion.",
+    },
+  ]
+
+  const environmentalStats = [
+    {
+      icon: TreePine,
+      value: "2.5M",
+      label: "Trees Saved",
+      description: "Equivalent trees saved through metal recycling",
+    },
+    {
+      icon: Factory,
+      value: "85%",
+      label: "Energy Reduction",
+      description: "Less energy used vs. new metal production",
+    },
+    {
+      icon: Recycle,
+      value: "500T",
+      label: "CO₂ Prevented",
+      description: "Carbon emissions prevented annually",
+    },
+    {
+      icon: Truck,
+      value: "1M+",
+      label: "Miles Saved",
+      description: "Transportation miles optimized",
     },
   ]
 
@@ -353,6 +431,123 @@ export function HomePage() {
                 </div>
               )
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Trust & Security Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Trade with Complete Confidence</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Your security is our priority. Every transaction is protected by multiple layers of security and
+              verification.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            {trustFeatures.map((feature, index) => {
+              const Icon = feature.icon
+              return (
+                <div key={index} className="text-center">
+                  <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Icon className="h-8 w-8 text-blue-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                  <p className="text-gray-600 text-sm">{feature.description}</p>
+                </div>
+              )
+            })}
+          </div>
+
+          <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-8">
+            <div className="grid md:grid-cols-3 gap-8 text-center">
+              <div>
+                <div className="text-3xl font-bold text-[#006636] mb-2">99.9%</div>
+                <div className="text-gray-600">Transaction Success Rate</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-[#006636] mb-2">$50K</div>
+                <div className="text-gray-600">Insurance Coverage</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-[#006636] mb-2">24/7</div>
+                <div className="text-gray-600">Security Monitoring</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Environmental Impact Section */}
+      <section className="py-16 bg-gradient-to-br from-green-50 to-blue-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Making a Real Environmental Impact</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Every transaction on ScrapLink contributes to a more sustainable future. See the collective impact of our
+              community.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            {environmentalStats.map((stat, index) => {
+              const Icon = stat.icon
+              return (
+                <Card key={index} className="text-center border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+                  <CardContent className="p-6">
+                    <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                      <Icon className="h-8 w-8 text-green-600" />
+                    </div>
+                    <div className="text-3xl font-bold text-[#006636] mb-2">{stat.value}</div>
+                    <div className="text-lg font-semibold text-gray-900 mb-1">{stat.label}</div>
+                    <div className="text-sm text-gray-600">{stat.description}</div>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </div>
+
+          <div className="bg-white rounded-2xl p-8 shadow-lg">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Real-Time Impact Counter</h3>
+                <p className="text-gray-600 mb-6">
+                  Watch as our community makes a difference in real-time. Every piece of scrap metal recycled through
+                  ScrapLink helps reduce environmental waste and carbon emissions.
+                </p>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-600">CO₂ Saved Today:</span>
+                    <span className="text-2xl font-bold text-green-600">{impactCounter + 1247} lbs</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-600">Metal Recycled Today:</span>
+                    <span className="text-2xl font-bold text-green-600">
+                      {Math.floor(impactCounter * 2.3) + 5420} lbs
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-600">Energy Saved Today:</span>
+                    <span className="text-2xl font-bold text-green-600">
+                      {Math.floor(impactCounter * 0.8) + 2100} kWh
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="relative">
+                <div className="w-full h-64 bg-gradient-to-br from-green-100 to-blue-100 rounded-xl flex items-center justify-center">
+                  <div className="text-center">
+                    <Leaf className="h-20 w-20 text-green-600 mx-auto mb-4 animate-pulse" />
+                    <div className="text-4xl font-bold text-green-600 mb-2">
+                      {Math.floor(impactCounter / 10) + 156}%
+                    </div>
+                    <div className="text-gray-600">Sustainability Goal Progress</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
