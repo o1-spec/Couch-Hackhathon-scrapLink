@@ -1,9 +1,7 @@
-import React from 'react'
+"use client"
 
-function Home() {
-  return (
-    <div>Home</div>
-  )
+import { HomePage } from "@/components/homepage/Homepage"
+
+export default function ScrapLinkApp() {
+  return <HomePage />
 }
-
-export default Home
