@@ -268,12 +268,24 @@ export function HomePage() {
                     </Link>
                   </>
                 ) : (
-                  <Link href="/dashboard">
-                    <Button size="lg" className="bg-[#006636] hover:bg-[#005528] text-white text-lg px-8 py-4 h-auto">
-                      Continue to Dashboard
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Button>
-                  </Link>
+                  <>
+                    <Link href="/dashboard">
+                      <Button size="lg" className="bg-[#006636] hover:bg-[#005528] text-white text-lg px-8 py-4 h-auto">
+                        Continue to Dashboard
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Button>
+                    </Link>
+                    <Link href="/demo">
+                      <Button
+                        size="lg"
+                        variant="outline"
+                        className="text-lg px-8 py-4 h-auto border-[#006636] text-[#006636] hover:bg-[#006636] hover:text-white bg-transparent"
+                      >
+                        <Play className="mr-2 h-5 w-5" />
+                        Watch Demo
+                      </Button>
+                    </Link>
+                  </>
                 )}
               </div>
 
@@ -284,9 +296,8 @@ export function HomePage() {
                   return (
                     <div
                       key={stat.label}
-                      className={`text-center p-4 rounded-lg transition-all duration-500 ${
-                        currentStat === index ? "bg-[#006636] text-white scale-105" : "bg-white text-gray-900"
-                      }`}
+                      className={`text-center p-4 rounded-lg transition-all duration-500 ${currentStat === index ? "bg-[#006636] text-white scale-105" : "bg-white text-gray-900"
+                        }`}
                     >
                       <Icon
                         className={`h-6 w-6 mx-auto mb-2 ${currentStat === index ? "text-white" : "text-[#006636]"}`}
