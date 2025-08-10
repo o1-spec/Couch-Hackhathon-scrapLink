@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -48,6 +48,18 @@ export function DashboardLayout({ children, user }: DashboardLayoutProps) {
   const [showSignOutDialog, setShowSignOutDialog] = useState(false)
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [unreadNotifications] = useState(3) // Mock unread count
+  const [currentUserType, setCurrentUserType] = useState<"seller" | "buyer">("seller")
+
+  // Read user type from localStorage on component mount
+  useEffect(() => {
+    const userType = localStorage.getItem('userType') as "seller" | "buyer" | null
+    if (userType) {
+      setCurrentUserType(userType)
+    } else {
+      // Fallback to user prop if localStorage is empty
+      setCurrentUserType(user.userType)
+    }
+  }, [user.userType])
 
   const sellerNavItems = [
     { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
@@ -69,7 +81,12 @@ export function DashboardLayout({ children, user }: DashboardLayoutProps) {
     { icon: Settings, label: "Settings", href: "/dashboard/settings" },
   ]
 
-  const navItems = user.userType === "seller" ? sellerNavItems : buyerNavItems
+  const navItems = currentUserType === "seller" ? sellerNavItems : buyerNavItems
+
+  const currentUser = {
+    ...user,
+    userType: currentUserType
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -97,7 +114,8 @@ export function DashboardLayout({ children, user }: DashboardLayoutProps) {
 
             {/* User Actions */}
             <div className="flex items-center gap-4">
-              {user.userType === "seller" && (
+              {/* Show "Add Listing" button only for sellers */}
+              {currentUserType === "seller" && (
                 <Button
                   size="sm"
                   className="bg-[#006636] hover:bg-[#005528] text-white font-poppins hidden sm:flex"
@@ -128,14 +146,14 @@ export function DashboardLayout({ children, user }: DashboardLayoutProps) {
               {/* User Profile */}
               <div className="flex items-center gap-3">
                 <div className="hidden sm:block text-right">
-                  <p className="text-sm font-medium text-gray-900 font-poppins">{user.name}</p>
+                  <p className="text-sm font-medium text-gray-900 font-poppins">{currentUser.name}</p>
                   <p className="text-xs text-gray-600 font-poppins capitalize">
-                    {user.userType} {user.isVerified && "• Verified"}
+                    {currentUserType} {currentUser.isVerified && "• Verified"}
                   </p>
                 </div>
                 <Image
-                  src={user.avatar || "/placeholder.svg"}
-                  alt={user.name}
+                  src={currentUser.avatar || "/user-placeholder.svg"}
+                  alt={currentUser.name}
                   width={40}
                   height={40}
                   className="w-10 h-10 rounded-full cursor-pointer"
@@ -190,15 +208,15 @@ export function DashboardLayout({ children, user }: DashboardLayoutProps) {
             <div className="p-4 border-t border-gray-200">
               <div className="flex items-center gap-3">
                 <Image
-                  src={user.avatar || "/placeholder.svg"}
-                  alt={user.name}
+                  src={currentUser.avatar || "/user-placeholder.svg"}
+                  alt={currentUser.name}
                   width={40}
                   height={40}
                   className="w-10 h-10 rounded-full"
                 />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate font-poppins">{user.name}</p>
-                  <p className="text-xs text-gray-600 truncate font-poppins">{user.location}</p>
+                  <p className="text-sm font-medium text-gray-900 truncate font-poppins">{currentUser.name}</p>
+                  <p className="text-xs text-gray-600 truncate font-poppins">{currentUser.location}</p>
                 </div>
               </div>
             </div>
@@ -218,7 +236,11 @@ export function DashboardLayout({ children, user }: DashboardLayoutProps) {
       </div>
 
       {/* Sign Out Dialog */}
-      <SignOutDialog isOpen={showSignOutDialog} onClose={() => setShowSignOutDialog(false)} user={user} />
+      <SignOutDialog 
+        isOpen={showSignOutDialog} 
+        onClose={() => setShowSignOutDialog(false)} 
+        user={currentUser} 
+      />
     </div>
   )
 }

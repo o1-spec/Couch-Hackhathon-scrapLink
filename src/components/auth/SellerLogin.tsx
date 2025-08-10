@@ -40,39 +40,31 @@ export function SellerLogin() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!validateAll()) {
       toast.error('Please check your credentials', 'Make sure all fields are filled correctly')
       return
     }
 
     setIsSubmitting(true)
-    
+
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      // Simulate different scenarios
-      const scenarios = ['success', 'invalid-credentials', 'unverified-email', 'account-locked']
-      const scenario = scenarios[Math.floor(Math.random() * scenarios.length)]
-      
-      switch (scenario) {
-        case 'success':
-          toast.success('Welcome back!', 'Redirecting to your dashboard...')
-          // Redirect to dashboard with seller type
-          setTimeout(() => router.push('/dashboard?type=seller'), 1500)
-          break
-        case 'invalid-credentials':
-          toast.error('Invalid credentials', 'Please check your email and password')
-          break
-        case 'unverified-email':
-          toast.warning('Email not verified', 'Please check your email and verify your account')
-          break
-        case 'account-locked':
-          toast.error('Account locked', 'Too many failed attempts. Please try again later')
-          break
+      const success = true 
+
+      if (success) {
+        localStorage.setItem('userType', 'seller')
+        localStorage.setItem('authToken', 'demo-token-seller')
+
+        toast.success('Seller Account Created!', 'Redirecting to your dashboard...')
+
+        setTimeout(() => {
+          router.push('/dashboard')
+        }, 1000) 
+      } else {
+        toast.error('Registration Failed', 'This email address is already registered')
       }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error('Something went wrong', 'Please try again later')
     } finally {
@@ -92,7 +84,7 @@ export function SellerLogin() {
               <h3 className="text-2xl font-bold text-gray-900 mb-2">Seller Sign In</h3>
               <p className="text-gray-600">Access your seller dashboard and listings</p>
             </div>
-            
+
             <form onSubmit={handleSubmit} className="space-y-4 font-poppins">
               <FormInput
                 id="email"
@@ -103,7 +95,7 @@ export function SellerLogin() {
                 icon={<Mail className="h-4 w-4" />}
                 {...getFieldProps('email')}
               />
-              
+
               <div>
                 <Label htmlFor="password" className="font-poppins">
                   Password <span className="text-red-500 ml-1">*</span>
@@ -114,11 +106,10 @@ export function SellerLogin() {
                     id="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
-                    className={`w-full pl-10 pr-10 py-2 border rounded-md font-poppins focus:outline-none focus:ring-2 focus:ring-[#006636] focus:border-transparent ${
-                      fields.password?.error && fields.password?.touched 
-                        ? 'border-red-500' 
+                    className={`w-full pl-10 pr-10 py-2 border rounded-md font-poppins focus:outline-none focus:ring-2 focus:ring-[#006636] focus:border-transparent ${fields.password?.error && fields.password?.touched
+                        ? 'border-red-500'
                         : 'border-gray-300'
-                    }`}
+                      }`}
                     {...getFieldProps('password')}
                   />
                   <button
@@ -133,11 +124,11 @@ export function SellerLogin() {
                   <p className="text-red-600 text-sm mt-1 font-poppins">{fields.password.error}</p>
                 )}
               </div>
-              
+
               <div className="flex items-center justify-between font-poppins">
                 <div className="flex items-center space-x-2 font-poppins">
-                  <Checkbox 
-                    id="remember" 
+                  <Checkbox
+                    id="remember"
                     checked={rememberMe}
                     onCheckedChange={(checked) => setRememberMe(checked as boolean)}
                   />
@@ -147,8 +138,8 @@ export function SellerLogin() {
                   Forgot password?
                 </Link>
               </div>
-              
-              <Button 
+
+              <Button
                 type="submit"
                 disabled={isSubmitting || !isValid}
                 className="w-full h-12 bg-[#006636] hover:bg-[#005528] text-white font-medium font-poppins disabled:opacity-50"
@@ -166,21 +157,21 @@ export function SellerLogin() {
                 )}
               </Button>
             </form>
-            
+
             <Separator className="my-6" />
-            
+
             <div className="text-center font-poppins">
               <span className="text-gray-600">Don&apos;t have an account? </span>
-              <Link 
+              <Link
                 href="/auth/signup/seller"
                 className="text-[#006636] hover:text-[#005528] font-medium font-poppins"
               >
                 Create seller account
               </Link>
             </div>
-            
+
             <div className="text-center mt-4 font-poppins">
-              <Link 
+              <Link
                 href="/auth/usertype"
                 className="text-gray-500 hover:text-gray-700 font-medium text-sm font-poppins"
               >

@@ -23,21 +23,24 @@ export function BuyerLogin() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
+
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      // Simulate success/error
-      const success = Math.random() > 0.3 // 70% success rate for demo
-      
+      const success = true 
+
       if (success) {
+        localStorage.setItem('userType', 'buyer')
+        localStorage.setItem('authToken', 'demo-token-buyer')
+
         toast.success('Welcome back!', 'Redirecting to your business dashboard...')
-        setTimeout(() => router.push('/dashboard?type=buyer'), 1500)
+
+        setTimeout(() => {
+          router.push('/dashboard')
+        }, 1000) 
       } else {
         toast.error('Invalid credentials', 'Please check your email and password')
       }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error('Something went wrong', 'Please try again later')
     } finally {
@@ -101,7 +104,7 @@ export function BuyerLogin() {
               </Link>
             </div>
 
-            <Button 
+            <Button
               type="submit"
               disabled={isSubmitting}
               className="w-full h-12 bg-[#006636] hover:bg-[#005528] text-white font-medium disabled:opacity-50"

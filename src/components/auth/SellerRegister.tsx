@@ -62,7 +62,7 @@ export function SellerRegister() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!validateAll()) {
       toast.error('Please fix the errors below', 'Check all required fields and try again')
       return
@@ -74,23 +74,24 @@ export function SellerRegister() {
     }
 
     setIsSubmitting(true)
-    
+
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      
-      // Simulate success/error
-      const success = Math.random() > 0.3 // 70% success rate for demo
-      
+      await new Promise(resolve => setTimeout(resolve, 1500))
+      const success = true 
+
       if (success) {
-        toast.success('Account Created!', 'Please check your email to verify your account')
-        console.log('hello')
-        // Redirect to dashboard after successful registration
-        setTimeout(() => router.push('/dashboard?type=seller'), 2000)
+        localStorage.setItem('userType', 'seller')
+        localStorage.setItem('authToken', 'demo-token-seller')
+
+        toast.success('Seller Account Created!', 'Redirecting to your dashboard...')
+
+        setTimeout(() => {
+          router.push('/dashboard')
+        }, 1000) // Add small delay to see the toast
       } else {
         toast.error('Registration Failed', 'This email address is already registered')
       }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error('Something went wrong', 'Please try again later')
     } finally {
@@ -110,7 +111,7 @@ export function SellerRegister() {
               <h3 className="text-2xl font-bold text-gray-900 mb-2 font-poppins">Create Seller Account</h3>
               <p className="text-gray-600 font-poppins">Start turning your scrap into cash today</p>
             </div>
-            
+
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <FormInput
@@ -130,7 +131,7 @@ export function SellerRegister() {
                   {...getFieldProps('lastName')}
                 />
               </div>
-              
+
               <FormInput
                 id="email"
                 label="Email Address"
@@ -140,7 +141,7 @@ export function SellerRegister() {
                 icon={<Mail className="h-4 w-4" />}
                 {...getFieldProps('email')}
               />
-              
+
               <FormInput
                 id="phone"
                 label="Phone Number"
@@ -150,7 +151,7 @@ export function SellerRegister() {
                 icon={<Phone className="h-4 w-4" />}
                 {...getFieldProps('phone')}
               />
-              
+
               <div>
                 <Label htmlFor="password" className="font-poppins">
                   Password <span className="text-red-500 ml-1">*</span>
@@ -161,11 +162,10 @@ export function SellerRegister() {
                     id="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="Create a strong password"
-                    className={`w-full pl-10 pr-10 py-2 border rounded-md font-poppins focus:outline-none focus:ring-2 focus:ring-[#006636] focus:border-transparent ${
-                      fields.password?.error && fields.password?.touched 
-                        ? 'border-red-500' 
+                    className={`w-full pl-10 pr-10 py-2 border rounded-md font-poppins focus:outline-none focus:ring-2 focus:ring-[#006636] focus:border-transparent ${fields.password?.error && fields.password?.touched
+                        ? 'border-red-500'
                         : 'border-gray-300'
-                    }`}
+                      }`}
                     {...getFieldProps('password')}
                   />
                   <button
@@ -180,10 +180,10 @@ export function SellerRegister() {
                   <p className="text-red-600 text-sm mt-1 font-poppins">{fields.password.error}</p>
                 )}
               </div>
-              
+
               <div className="flex items-center space-x-2">
-                <Checkbox 
-                  id="terms" 
+                <Checkbox
+                  id="terms"
                   checked={acceptTerms}
                   onCheckedChange={(checked) => setAcceptTerms(checked as boolean)}
                 />
@@ -191,8 +191,8 @@ export function SellerRegister() {
                   I agree to the <span className="text-[#006636] hover:underline cursor-pointer">Terms of Service</span> and <span className="text-[#006636] hover:underline cursor-pointer">Privacy Policy</span>
                 </Label>
               </div>
-              
-              <Button 
+
+              <Button
                 type="submit"
                 disabled={isSubmitting || !isValid || !acceptTerms}
                 className="w-full h-12 bg-[#006636] hover:bg-[#005528] text-white font-medium font-poppins disabled:opacity-50"
@@ -210,19 +210,19 @@ export function SellerRegister() {
                 )}
               </Button>
             </form>
-            
+
             <div className="text-center mt-6">
               <span className="text-gray-600 font-poppins">Already have an account? </span>
-              <Link 
+              <Link
                 href="/auth/login/seller"
                 className="text-[#006636] hover:text-[#005528] font-medium font-poppins"
               >
                 Sign in
               </Link>
             </div>
-            
+
             <div className="text-center mt-4">
-              <Link 
+              <Link
                 href="/auth/usertype"
                 className="text-gray-500 hover:text-gray-700 font-medium text-sm font-poppins"
               >
