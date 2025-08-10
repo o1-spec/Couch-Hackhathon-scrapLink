@@ -12,7 +12,6 @@ import { useToast } from '@/hooks/use-toast'
 import { Coins, Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { FormInput } from '../ui/form-input'
-import { ToastContainer } from '../ui/toast-container'
 
 export function SellerLogin() {
   const [showPassword, setShowPassword] = useState(false)
@@ -181,7 +180,6 @@ export function SellerLogin() {
           </CardContent>
         </Card>
       </div>
-      <ToastContainer />
     </>
   )
 }

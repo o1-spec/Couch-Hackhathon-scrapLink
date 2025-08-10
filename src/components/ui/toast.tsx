@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { X } from 'lucide-react'
+import { X, CheckCircle, XCircle, AlertTriangle, Info } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export interface ToastProps {
@@ -21,18 +21,25 @@ export function Toast({ id, title, description, type = 'info', onClose }: ToastP
     info: 'bg-blue-50 border-blue-200 text-blue-800'
   }
 
-  const iconColors = {
-    success: 'text-green-400',
-    error: 'text-red-400',
-    warning: 'text-yellow-400',
-    info: 'text-blue-400'
+  const getIcon = () => {
+    switch (type) {
+      case 'success':
+        return <CheckCircle className="h-5 w-5 text-green-500" />
+      case 'error':
+        return <XCircle className="h-5 w-5 text-red-500" />
+      case 'warning':
+        return <AlertTriangle className="h-5 w-5 text-yellow-500" />
+      default:
+        return <Info className="h-5 w-5 text-blue-500" />
+    }
   }
 
   return (
     <div className={cn(
-      'relative flex w-full items-center space-x-4 overflow-hidden rounded-md border p-6 pr-8 shadow-lg transition-all animate-in slide-in-from-right-full',
+      'relative flex w-full items-start gap-3 overflow-hidden rounded-md border p-4 shadow-lg transition-all animate-in slide-in-from-right-full',
       typeStyles[type]
     )}>
+      {getIcon()}
       <div className="grid gap-1 flex-1">
         {title && (
           <div className="text-sm font-semibold font-poppins">{title}</div>
@@ -43,10 +50,7 @@ export function Toast({ id, title, description, type = 'info', onClose }: ToastP
       </div>
       <button
         onClick={() => onClose(id)}
-        className={cn(
-          'absolute right-2 top-2 rounded-md p-1 opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2',
-          iconColors[type]
-        )}
+        className="absolute right-2 top-2 rounded-md p-1 text-gray-500 hover:text-gray-700 focus:outline-none"
       >
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>

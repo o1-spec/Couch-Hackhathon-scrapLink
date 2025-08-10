@@ -11,7 +11,6 @@ import { Separator } from '@/components/ui/separator'
 import { useToast } from '@/hooks/use-toast'
 import { Building2, Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import { ToastContainer } from '../ui/toast-container'
 
 export function BuyerLogin() {
   const [showPassword, setShowPassword] = useState(false)
@@ -145,7 +144,6 @@ export function BuyerLogin() {
           </div>
         </CardContent>
       </Card>
-      <ToastContainer />
     </div>
   )
 }

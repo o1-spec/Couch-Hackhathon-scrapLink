@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import AuthAnimation from "@/components/auth/AuthAnimation"
+import { ToastContainer } from "@/components/ui/toast-container"
 
 export const metadata: Metadata = {
   title: "Join ScrapLink | Revolutionary Scrap Metal Trading",
@@ -18,7 +19,10 @@ export default function AuthLayout({
         <AuthAnimation />
       </div>
       <div className="w-full lg:w-1/2 lg:ml-auto min-h-screen overflow-y-auto">
-        <div className="min-h-screen">{children}</div>
+        <div className="min-h-screen">
+          {children} 
+          <ToastContainer />
+          </div>
       </div>
     </div>
   )
